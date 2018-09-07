@@ -48,7 +48,6 @@ module WashOut
       body.respond_to?(:string) ? body.string : body.read
     ensure
       body.rewind if body.respond_to? :rewind
-
-
     end
+  end
 end
