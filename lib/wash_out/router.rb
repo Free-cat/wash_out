@@ -14,7 +14,7 @@ module WashOut
       soap_action = env['HTTP_SOAPACTION']
 
       if soap_action.blank?
-        parsed_soap_body = nori(controller.soap_config.snakecase_input).parse(soap_body env)
+        parsed_soap_body = Nori.parse(soap_body env)
         return nil if parsed_soap_body.blank?
 
         soap_action = parsed_soap_body.values_at(:envelope, :Envelope).try(:compact).try(:first)
@@ -42,5 +42,13 @@ module WashOut
       controller.action(action).call(env)
     end
 
-  end
+    def soap_body(env)
+      body = env['rack.input']
+      body.rewind if body.respond_to? :rewind
+      body.respond_to?(:string) ? body.string : body.read
+    ensure
+      body.rewind if body.respond_to? :rewind
+
+
+    end
 end
