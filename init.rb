@@ -1,0 +1,1 @@
+require 'wash_out'
