@@ -33,6 +33,7 @@ module WashOut
       end
 
       action_spec = controller.soap_actions[soap_action]
+      action_spec ||= controller.soap_actions[soap_action.camelize]
       if action_spec
         action = action_spec[:to]
       else
