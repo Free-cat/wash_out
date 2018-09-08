@@ -5,21 +5,21 @@ module WashOutHelper
 
       if !param.struct?
         if !param.multiplied
-          xml.tag! tag_name, param.value, "xsi:type" => param.namespaced_type
+          xml.tag! "tns:#{tag_name}", param.value, "xsi:type" => param.namespaced_type
         else
           param.value = [] unless param.value.is_a?(Array)
           param.value.each do |v|
-            xml.tag! tag_name, v, "xsi:type" => param.namespaced_type
+            xml.tag! "tns:#{tag_name}", v, "xsi:type" => param.namespaced_type
           end
         end
       else
         if !param.multiplied
-          xml.tag! tag_name, "xsi:type" => param.namespaced_type do
+          xml.tag! "tns:#{tag_name}", "xsi:type" => param.namespaced_type do
             wsdl_data(xml, param.map)
           end
         else
           param.map.each do |p|
-            xml.tag! tag_name, "xsi:type" => param.namespaced_type do
+            xml.tag! "tns:#{tag_name}", "xsi:type" => param.namespaced_type do
               wsdl_data(xml, p.map)
             end
           end
