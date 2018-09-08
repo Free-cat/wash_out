@@ -18,11 +18,11 @@ module WashOut
       @map        = {}
       @multiplied = multiplied
 
-      if WashOut::Engine.camelize_wsdl.to_s == 'lower'
-        @name = @name.camelize(:lower)
-      elsif WashOut::Engine.camelize_wsdl
-        @name = @name.camelize
-      end
+      # if WashOut::Engine.camelize_wsdl.to_s == 'lower'
+      #   @name = @name.camelize(:lower)
+      # elsif WashOut::Engine.camelize_wsdl
+      #   @name = @name.camelize
+      # end
 
       if type.is_a?(Symbol)
         @type = type.to_s
